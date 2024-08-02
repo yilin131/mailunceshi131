@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chakra Test</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <div id="start-page" class="page active">
+      <h1>Chakra Test: Root Chakra</h1>
+      <button id="start-button">Start Test</button>
+    </div>
+    <div id="question-page" class="page">
+      <h2 id="question-title"></h2>
+      <div id="options">
+        <!-- Options will be injected here -->
+      </div>
+    </div>
+    <div id="result-page" class="page">
+      <h2>Test Completed</h2>
+      <p id="result-text"></p >
+    </div>
+  </div>
+  <script>
+    const questions = [
+      {
+        question: "你在团队中负责一个重要项目，但突然出现了紧急情况。你的反应是：",
+        options: [
+          { text: "冷静处理，合理分配任务，确保项目顺利进行", score: 3 },
+          { text: "过于自信，独自承担所有责任，忽略团队协作", score: 4 },
+          { text: "感到有些紧张，但仍能部分处理问题，需要他人帮助", score: 2 },
+          { text: "十分紧张，不知所措，无法有效应对", score: 1 },
+        ],
+      },
+      {
+        question: "在公司年度评审中，你对自己的表现和贡献感到：",
+        options: [
+          { text: "完全满意，认为自己不需要再改进", score: 4 },
+          { text: "基本满意，但意识到有改进空间", score: 3 },
+          { text: "有些不安，担心自己表现不佳", score: 2 },
+          { text: "非常不安，觉得自己没有做出任何贡献", score: 1 },
+        ],
+      },
+      {
+        question: "当你与同事讨论工作时，遇到意见不合的情况，你会：",
+        options: [
+          { text: "强烈坚持自己的观点，不愿妥协", score: 4 },
+          { text: "理性沟通，愿意听取对方意见并达成共识", score: 3 },
+          { text: "有些不安，但还是表达自己的看法", score: 2 },
+          { text: "不敢表达意见，完全服从对方", score: 1 },
+        ],
+      },
+      {
+        question: "你在公司财务状况不稳定时，会：",
+        options: [
+          { text: "过度储蓄，减少所有开支，即使是必要的", score: 4 },
+          { text: "适度调整支出，确保基本生活质量", score: 3 },
+          { text: "有些担心，但仍维持正常开支", score: 2 },
+          { text: "感到极度焦虑，不知如何应对", score: 1 },
+        ],
+      },
+      {
+        question: "你在家中独自处理突发的紧急维修问题时，会：",
+        options: [
+          { text: "完全自信，认为自己可以解决一切问题", score: 4 },
+          { text: "冷静分析问题，考虑请专业人士帮助", score: 3 },
+          { text: "感到有些不安，但尝试自行解决", score: 2 },
+          { text: "非常紧张，不敢动手，等待他人解决", score: 1 },
+        ],
+      },
+    ];
+
+    let currentQuestionIndex = 0;
+    let totalScore = 0;
+
+    const startPage = document.getElementById("start-page");
+    const questionPage = document.getElementById("question-page");
+    const resultPage = document.getElementById("result-page");
+    const startButton = document.getElementById("start-button");
+    const questionTitle = document.getElementById("question-title");
+    const optionsContainer = document.getElementById("options");
+    const resultText = document.getElementById("result-text");
+
+    startButton.addEventListener("click", startTest);
+
+    function startTest() {
+      startPage.classList.remove("active");
+      questionPage.classList.add("active");
+      showQuestion();
+    }
+
+    function showQuestion() {
+      const currentQuestion = questions[currentQuestionIndex];
+      questionTitle.textContent = currentQuestion.question;
+      optionsContainer.innerHTML = "";
+      currentQuestion.options.forEach((option) => {
+        const button = document.createElement("button");
+        button.textContent = option.text;
+        button.addEventListener("click", () => handleAnswer(option.score));
+        optionsContainer.appendChild(button);
+      });
+    }
+
+    function handleAnswer(score) {
+      totalScore += score;
+      currentQuestionIndex++;
+      if (currentQuestionIndex < questions.length) {
+        showQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      questionPage.classList.remove("active");
+      resultPage.classList.add("active");
+      resultText.textContent = `你的总分是：${totalScore}`;
+      // 根据总分进行脉轮分析，可以在这里添加更多分析内容
+    }
+  </script>
+</body>
+</html>
