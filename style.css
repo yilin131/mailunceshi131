@@ -1,38 +1,158 @@
 body {
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  background-color: #f0f0f0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* 改为顶部对齐，防止顶部内容被截断 */
+    min-height: 100vh;
+    overflow-y: auto; /* 启用垂直滚动条 */
 }
 
 #app {
-  width: 100%;
-  max-width: 600px;
-  padding: 20px;
-  background: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  text-align: center;
+    width: 100%;
+    max-width: 700px;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 20px;
 }
 
 .page {
-  display: none;
+    display: none;
 }
 
 .page.active {
-  display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%; 
 }
 
-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 20px;
+h1, h2 {
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
-button + button {
-  margin-top: 10px;
+.primary-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.primary-btn:hover {
+    background-color: #0056b3;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.options-container button {
+    padding: 10px;
+    font-size: 14px;
+    color: #333;
+    background-color: #e7e7e7;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.options-container button:hover {
+    background-color: #d4d4d4;
+}
+
+#result-page {
+    padding-top: 20px;
+    text-align: left;
+    flex-grow: 1; /* 允许结果页面扩展，确保所有内容都显示 */
+}
+
+#result-details {
+    margin-bottom: 40px;
+    padding: 10px;
+    overflow-y: auto; /* 如果内容超出，将显示滚动条 */
+}
+
+.chakra-summary {
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    color: #fff;
+    line-height: 1.6;
+}
+
+.chakra-summary .summary-text {
+    font-weight: normal;
+}
+
+.chakra-summary .chakra-name {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+/* 各个脉轮的颜色样式 */
+.root-chakra { background-color: #e53935; } /* 海底轮 */
+.sacral-chakra { background-color: #f57c00; } /* 脐轮 */
+.solarPlexus-chakra { background-color: #fbc02d; } /* 太阳神经丛轮 */
+.heart-chakra { background-color: #43a047; } /* 心轮 */
+.throat-chakra { background-color: #1e88e5; } /* 喉轮 */
+.thirdEye-chakra { background-color: #5e35b1; } /* 眉心轮 */
+.crown-chakra { background-color: #8e24aa; } /* 顶轮 */
+
+.return-btn {
+    margin-top: 20px; /* 调整按钮的间距 */
+    align-self: center; /* 让返回按钮居中 */
+}
+
+#progress-bar-container {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 25px;
+    margin-bottom: 20px;
+}
+
+#progress-bar {
+    width: 0%;
+    height: 20px;
+    background-color: #4caf50;
+    border-radius: 25px;
+}
+
+/* 新增的数据条样式 */
+.score-bar-container {
+    margin-bottom: 15px;
+}
+
+.score-bar-label {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.score-bar {
+    height: 20px;
+    background: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff); /* 渐变彩虹色 */
+    border-radius: 10px;
+    width: 0; /* 初始宽度为0，后续通过JS动态修改 */
+    transition: width 0.5s ease-in-out;
+}
+
+#company-info {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #555;
+    text-align: center;
 }
